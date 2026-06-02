@@ -39,8 +39,8 @@ python -m streamlit run [app.py](http://app.py)
 ## Project Structure
 
 - [app.py](http://app.py) - main Streamlit app
-- bmi_module.py - BMI calculator (Yada)
-- edd_module.py - delivery date calculator (Yada)
-- risk_module.py - risk prediction AI model (Team)
+- bmi_module.py - BMI calculator 
+- edd_module.py - delivery date calculator 
+- risk_module.py - risk prediction AI model 
 - Requirements.txt - required libraries
 
