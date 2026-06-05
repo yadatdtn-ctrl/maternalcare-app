@@ -17,8 +17,3 @@ def calculate_weeks(lmp):
     weeks = days_passed // 7
     return weeks
 
-
-if __name__ == "__main__":
-    lmp = date(2025, 9, 1)
-    print(calculate_edd(lmp))
-    print(calculate_weeks(lmp))
