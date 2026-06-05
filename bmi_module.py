@@ -7,7 +7,7 @@ def classify_bmi(bmi):
     if bmi < 18.5:
         return "Underweight"
     elif bmi >= 18.5 and bmi <= 24.9:
-        return "Normal weight"
+        return "Normal"
     else:
         return "Overweight"
 

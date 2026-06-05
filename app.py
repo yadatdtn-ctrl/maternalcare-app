@@ -88,10 +88,13 @@ with tab3:
 
         if risk == "low risk":
             st.success("Result: low risk")
+            st.info("Your health indicators look good. Keep up regular check-ups.")
         elif risk == "mid risk":
             st.warning("Result: mid risk")
+            st.info("Some indicators need attention. Please consult your doctor soon.")
         elif risk == "high risk":
             st.error("Result: high risk")
+            st.info("Please consult your doctor immediately.")
         else:
             st.error(
                 f"Unexpected prediction: {risk!r}. "
