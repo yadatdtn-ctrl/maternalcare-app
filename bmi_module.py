@@ -1,20 +1,24 @@
-# BMI Calculator Module
+# BMI Calculator Module.
+# Calculates Body Mass Index from weight and height, then classifies the result.
+
+
+# Calculate BMI from weight (kg) and height (metres).
 def calculate_bmi(weight, height):
     bmi = weight / (height ** 2)
     return round(bmi, 2)
 
+
+# Classify a BMI value as Underweight, Normal, or Overweight.
 def classify_bmi(bmi):
     if bmi < 18.5:
         return "Underweight"
-    elif bmi >= 18.5 and bmi <= 24.9:
+    elif 18.5 <= bmi <= 24.9:
         return "Normal"
     else:
         return "Overweight"
 
 
-#Testing the functions
-bmi = calculate_bmi(70, 1.70)
-print(bmi)
-
-category = classify_bmi(bmi)
-print(category)
+if __name__ == "__main__":
+    bmi = calculate_bmi(70, 1.70)
+    print(bmi)
+    print(classify_bmi(bmi))

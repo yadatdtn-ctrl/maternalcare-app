@@ -1,4 +1,5 @@
-# Maternal Risk Prediction Module
+# Maternal Risk Prediction Module.
+# Loads the CSV dataset, trains a Random Forest model, and predicts risk levels.
 
 import pandas as pd
 from sklearn.ensemble import RandomForestClassifier
@@ -6,42 +7,29 @@ from sklearn.metrics import accuracy_score
 from sklearn.model_selection import train_test_split
 
 
+# Load the maternal health dataset from a CSV file.
 def load_data(filepath="maternal_health_risk.csv"):
-    """
-    Load the maternal health dataset from a CSV file.
-    Returns a pandas DataFrame (think of it as a spreadsheet in Python).
-    """
     data = pd.read_csv(filepath)
     return data
 
 
+# Split the dataset into feature columns (X) and the target label (y).
 def prepare_features_and_target(data):
-    """
-    Split the dataset into:
-    - features (X): the health measurements the model learns from
-    - target (y): the risk level we want to predict
-    """
     feature_columns = ["Age", "SystolicBP", "DiastolicBP", "BS", "BodyTemp", "HeartRate"]
     X = data[feature_columns]
     y = data["RiskLevel"]
     return X, y
 
 
+# Train a Random Forest Classifier on the given features and target.
 def train_model(X, y):
-    """
-    Train a Random Forest Classifier on the features and target.
-    Returns the trained model, ready to make predictions.
-    """
     model = RandomForestClassifier(random_state=42)
     model.fit(X, y)
     return model
 
 
+# Predict the risk level for one patient using a trained model.
 def predict_risk(model, age, systolic_bp, diastolic_bp, bs, body_temp, heart_rate):
-    """
-    Predict the risk level for one patient using their health measurements.
-    Returns text: 'low risk', 'mid risk', or 'high risk'.
-    """
     patient_data = pd.DataFrame(
         [[age, systolic_bp, diastolic_bp, bs, body_temp, heart_rate]],
         columns=["Age", "SystolicBP", "DiastolicBP", "BS", "BodyTemp", "HeartRate"],
@@ -54,11 +42,8 @@ _trained_model = None
 _model_accuracy = None
 
 
+# Train the model once (80% of data) and cache it along with its test accuracy.
 def _ensure_model_ready(filepath="maternal_health_risk.csv"):
-    """
-    Train once on 80% of the data and evaluate on the held-out 20%.
-    The same model used for predictions is the one whose accuracy we report.
-    """
     global _trained_model, _model_accuracy
 
     if _trained_model is None:
@@ -74,23 +59,16 @@ def _ensure_model_ready(filepath="maternal_health_risk.csv"):
     return _trained_model, _model_accuracy
 
 
+# Main function for the app: train (if needed) and return a risk prediction.
 def predict_maternal_risk(age, systolic_bp, diastolic_bp, bs, body_temp, heart_rate):
-    """
-    Main function for the app: load data, train the model (once), and predict risk.
-    Returns text: 'low risk', 'mid risk', or 'high risk'.
-    """
     model, _ = _ensure_model_ready()
-
     return predict_risk(
         model, age, systolic_bp, diastolic_bp, bs, body_temp, heart_rate
     )
 
 
+# Return the accuracy of the same model used for live predictions.
 def get_model_accuracy(filepath="maternal_health_risk.csv"):
-    """
-    Return accuracy for the same model that makes live predictions.
-    Measured on 20% of the dataset held out during training.
-    """
     _, accuracy = _ensure_model_ready(filepath)
     return accuracy
 

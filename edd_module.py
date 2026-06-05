@@ -1,22 +1,24 @@
-# Expected Delivery Date Module
+# Expected Delivery Date Module.
+# Calculates the due date and current weeks of pregnancy from the last menstrual period (LMP).
+
 from datetime import date, timedelta
 
-def calculate_edd(Imp):
-    edd = Imp + timedelta(days=280)
+
+# Calculate the expected delivery date (EDD) by adding 280 days to the LMP.
+def calculate_edd(lmp):
+    edd = lmp + timedelta(days=280)
     return edd
 
-def calculate_weeks(Imp):
-    edd = Imp + timedelta(days=280)
-    return edd
 
-def calculate_weeks(Imp):
+# Calculate how many full weeks have passed since the LMP.
+def calculate_weeks(lmp):
     today = date.today()
-    days_passed = (today - Imp).days
+    days_passed = (today - lmp).days
     weeks = days_passed // 7
     return weeks
 
-# Testing the functions
-Imp = date(2025, 9, 1)
-print(calculate_edd(Imp))
-print(calculate_weeks(Imp))
 
+if __name__ == "__main__":
+    lmp = date(2025, 9, 1)
+    print(calculate_edd(lmp))
+    print(calculate_weeks(lmp))

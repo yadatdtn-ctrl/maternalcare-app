@@ -1,6 +1,10 @@
-# MaternalCare AI — Main App
+# Main Streamlit app for MaternalCare AI.
+# Provides three tabs: BMI Calculator, Delivery Date, and Risk Prediction.
+
+from datetime import date
 
 import streamlit as st
+
 from bmi_module import calculate_bmi, classify_bmi
 from edd_module import calculate_edd, calculate_weeks
 from risk_module import get_model_accuracy, predict_maternal_risk
@@ -11,6 +15,7 @@ st.divider()
 
 tab1, tab2, tab3 = st.tabs(["BMI Calculator", "Delivery Date", "Risk Prediction"])
 
+# --- Tab 1: BMI Calculator ---
 with tab1:
     st.header("BMI Calculator")
     weight = st.number_input("Weight (kg)", min_value=1.0, value=65.0)
@@ -23,17 +28,18 @@ with tab1:
         st.metric("Your BMI", bmi)
         st.success(f"Category: {category}")
 
+# --- Tab 2: Delivery Date ---
 with tab2:
     st.header("Delivery Date")
-    from datetime import date
-    Imp = st.date_input("Last Menstrual Period (LMP)", value=date(2025, 9, 1))
+    lmp = st.date_input("Last Menstrual Period (LMP)", value=date(2025, 9, 1))
 
     if st.button("Calculate Delivery Date"):
-        edd = calculate_edd(Imp)
-        weeks = calculate_weeks(Imp)
+        edd = calculate_edd(lmp)
+        weeks = calculate_weeks(lmp)
         st.metric("Expected Delivery Date", edd.strftime("%d %B %Y"))
         st.metric("Weeks Pregnant", f"Week {weeks}")
 
+# --- Tab 3: Risk Prediction ---
 with tab3:
     st.header("Risk Prediction")
     st.write("Enter health measurements to predict maternal risk level.")
@@ -100,4 +106,3 @@ with tab3:
                 f"Unexpected prediction: {risk!r}. "
                 "Expected 'low risk', 'mid risk', or 'high risk'."
             )
-
