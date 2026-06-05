@@ -17,8 +17,3 @@ def classify_bmi(bmi):
     else:
         return "Overweight"
 
-
-if __name__ == "__main__":
-    bmi = calculate_bmi(70, 1.70)
-    print(bmi)
-    print(classify_bmi(bmi))
