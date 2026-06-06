@@ -4,7 +4,7 @@
 # Import the pandas library and nickname it "pd" so we can use it easily
 import pandas as pd
 
-# Import Random Forest — the type of AI model we use to classify risk levels
+# Import Random Forest - the type of AI model we use to classify risk levels
 from sklearn.ensemble import RandomForestClassifier
 
 # Import a tool that checks how many predictions the model got right
@@ -12,7 +12,6 @@ from sklearn.metrics import accuracy_score
 
 # Import a tool that splits data into a training part and a testing part
 from sklearn.model_selection import train_test_split
-
 
 # Define a function that reads the CSV file and returns the data as a table
 def load_data(filepath="maternal_health_risk.csv"):

@@ -7,7 +7,7 @@ import streamlit as st
 
 from bmi_module import calculate_bmi, classify_bmi
 from edd_module import calculate_edd, calculate_weeks
-from risk_module import get_model_accuracy, predict_maternal_risk
+from risk_module import predict_maternal_risk
 
 st.title("Maternalcare AI")
 st.write("A smart health assistant for pregnant women")
@@ -43,13 +43,6 @@ with tab2:
 with tab3:
     st.header("Risk Prediction")
     st.write("Enter health measurements to predict maternal risk level.")
-
-    accuracy = get_model_accuracy()
-    st.info(
-        f"Model accuracy on held-out test data: **{accuracy}%**. "
-        "This score applies to the same model making your predictions "
-        "(trained on 80% of the dataset, tested on the remaining 20%)."
-    )
 
     age = st.number_input(
         "Age",
